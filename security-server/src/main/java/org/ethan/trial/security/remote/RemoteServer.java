@@ -13,7 +13,7 @@ public class RemoteServer {
 		LocateRegistry.createRegistry(1099);
 		System.out.println("RMI registry created.");
 
-		RmiLogin login = new RmiLoginImpl();
+		RemoteLogin login = new RemoteLoginImpl();
 		Naming.rebind("//localhost/login", login);
 		System.out.println("Server bound in registry");
 	}

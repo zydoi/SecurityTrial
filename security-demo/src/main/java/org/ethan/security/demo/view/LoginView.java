@@ -17,6 +17,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.ethan.security.demo.remote.UserService;
+import org.ethan.trial.security.dto.User;
+
 public class LoginView extends JDialog {
 
 	private static final long serialVersionUID = -4720720522882886845L;
@@ -79,13 +82,18 @@ public class LoginView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				SuccessView parent = (SuccessView)getParent();
-				parent.setUserName(jtfUsername.getText());
-				parent.setVisible(true);
-				setVisible(false);
-				
-//                jlblStatus.setText("Invalid username or password");
+				String username = jtfUsername.getText();
+				char[] password = jpfPassword.getPassword();
+				boolean isSucceed = UserService.getInstance().login(username, password);
+				if (isSucceed) {
+
+					SuccessView parent = (SuccessView) getParent();
+					parent.setUserName(jtfUsername.getText());
+					parent.setVisible(true);
+					setVisible(false);
+				} else {
+					jlblStatus.setText("Invalid username or password");
+				}
 
 			}
 		});

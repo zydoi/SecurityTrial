@@ -32,6 +32,6 @@ public class SuccessView extends JFrame {
 	}
 	
 	public void setUserName(String name) {
-		lblMessage.setText(name + "logged in successfully.");
+		lblMessage.setText(name + " logged in successfully.");
 	}
 }

@@ -1,4 +1,4 @@
-package org.ethan.trial.security.server.auth;
+package org.ethan.trial.security.auth;
 
 import java.io.Serializable;
 
@@ -56,8 +56,9 @@ public class UserLoginAuth {
 		// token.setRememberMe(true);
 		user.login(token);
 
-		Subject existUser = new Subject.Builder().sessionId(sessionId).buildSubject();
-		log.info(existUser.getPrincipal());
-		
+		Subject existUser = new Subject.Builder().sessionId(sessionId.toString() + 1).buildSubject();
+		if(existUser.isAuthenticated()) {
+			log.info(existUser.getPrincipal() + " logged in already.");
+		}
 	}
 }
