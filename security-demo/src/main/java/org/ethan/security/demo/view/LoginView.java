@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import org.ethan.security.demo.remote.UserService;
-import org.ethan.trial.security.dto.User;
 
 public class LoginView extends JDialog {
 

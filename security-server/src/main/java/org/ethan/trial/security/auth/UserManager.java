@@ -2,9 +2,7 @@ package org.ethan.trial.security.auth;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
@@ -44,7 +42,7 @@ public final class UserManager {
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		try {
 			user.login(token);
-		} catch (UnknownAccountException | IncorrectCredentialsException | LockedAccountException e) {
+		} catch (AuthenticationException e) {
 			log.warn("Login failed: " + e);
 			throw new RemoteAuthenticationException(e.getMessage());
 		} 

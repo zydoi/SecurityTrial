@@ -51,4 +51,9 @@ public class RemoteSessionImpl extends UnicastRemoteObject implements RemoteSess
 		return user;
 	}
 
+	@Override
+	public String getSessionId() throws RemoteException {
+		return null;
+	}
+
 }
