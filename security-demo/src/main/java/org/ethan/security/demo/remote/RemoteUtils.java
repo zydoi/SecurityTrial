@@ -14,7 +14,6 @@ public class RemoteUtils {
 		try {
 			service = (T) Naming.lookup("//localhost/" + name);
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			// TODO
 			System.out.println("Cannot establish connection: " + e);
 		}
 		return service;

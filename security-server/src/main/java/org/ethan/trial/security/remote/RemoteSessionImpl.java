@@ -6,8 +6,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.rmi.server.Unreferenced;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.ethan.trial.security.dto.User;
+import org.ethan.trial.security.dto.UserDTO;
 
 
 public class RemoteSessionImpl extends UnicastRemoteObject implements RemoteSession, Unreferenced {
@@ -16,7 +17,9 @@ public class RemoteSessionImpl extends UnicastRemoteObject implements RemoteSess
 
 	private static final Logger logger = Logger.getLogger(RemoteSessionImpl.class);
 	
-	private User user;
+	private UserDTO user;
+	
+	private Session session;
 	
 	protected RemoteSessionImpl() throws RemoteException {
 		super(1199);
@@ -24,7 +27,8 @@ public class RemoteSessionImpl extends UnicastRemoteObject implements RemoteSess
 
 	public RemoteSessionImpl(Subject subject) throws RemoteException {
 		super(1199);
-		this.user = new User(subject.getPrincipal().toString());
+		this.user = new UserDTO(subject.getPrincipal().toString());
+		this.session = subject.getSession();
 	}
 
 
@@ -47,13 +51,13 @@ public class RemoteSessionImpl extends UnicastRemoteObject implements RemoteSess
 	}
 
 	@Override
-	public User getUser() throws RemoteException {
+	public UserDTO getUser() throws RemoteException {
 		return user;
 	}
 
 	@Override
 	public String getSessionId() throws RemoteException {
-		return null;
+		return (String) session.getId();
 	}
 
 }

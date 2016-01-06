@@ -2,7 +2,7 @@ package org.ethan.security.demo.remote;
 
 import java.rmi.RemoteException;
 
-import org.ethan.trial.security.dto.User;
+import org.ethan.trial.security.dto.UserDTO;
 import org.ethan.trial.security.remote.RemoteLogin;
 import org.ethan.trial.security.remote.RemoteSession;
 
@@ -37,8 +37,8 @@ public class UserService {
 		return false;
 	}
 
-	public User getCurrentUser() {
-		User user = null;
+	public UserDTO getCurrentUser() {
+		UserDTO user = null;
 		try {
 			 user = session.getUser();
 		} catch (RemoteException e) {
